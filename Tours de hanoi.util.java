@@ -26,7 +26,15 @@ public class Main {
             }
 
             public String toString() {
-                return (" ");
+                String result = "Tour: ";
+                for (int i = 0; i < nombreDanneaux; i++) {
+                    if (i <= top) {
+                        result += Tour[i].taille + " ";  // Ajouter le diamètre de l'anneau suivi d'un espace
+                    } else {
+                        result += "- ";  // Un tiret pour les emplacements vides suivi d'un espace
+                    }
+                }
+                return result.trim();  // Enlever l'espace en trop à la fin
             }
 
             public int peek(){
@@ -144,8 +152,9 @@ public class Main {
             }
 
             public String toString() {
-                String fullstring = /n + A.toString + /n + B.toString + /n + C.toString;
-                return fullstring;
+                return "Tour A: " + A.toString() + "\n" + 
+                       "Tour B: " + B.toString() + "\n" + 
+                       "Tour C: " + C.toString();
             }
 
     }
