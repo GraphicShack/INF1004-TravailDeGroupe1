@@ -14,8 +14,7 @@ public class Main {
             taille = x;
         }
     }
-}   
-
+   
     public Tour (int x) {
     nombreDanneaux = x;//Définir nombre d'anneaux
     pile = new Anneau(nombreDanneaux);//Créer la pile tour qui est contenant des anneaux
