@@ -16,6 +16,7 @@ public class ToursHanoi {
         for(int n = nombreDanneaux; n > 0; n--){
         	ph[nombreDanneaux - n] = new Anneau(n);//ajouter les anneaux sur la pile temporaire
         }
+        this.reinitialiser();
     }
 
     public void reinitialiser() {
@@ -43,6 +44,7 @@ public class ToursHanoi {
     	    		System.out.println("Il n'y a pas d'anneau sur la tour A");
     	    		return;//met fin a la method pour que le joueur peut continuer a jouer
     	    	}
+    			i=A.pile[A.top];//va chercher l'anneau a deplacer
     			break;
     		case 2:
     			deHaut = B.peek();
@@ -50,6 +52,7 @@ public class ToursHanoi {
     	    		System.out.println("Il n'y a pas d'anneau sur la tour B");
     	    		return;
     	    	}
+    			i=B.pile[B.top];//va chercher l'anneau a deplacer
     			break;
     		case 3:
     			deHaut = C.peek();
@@ -57,13 +60,12 @@ public class ToursHanoi {
     	    		System.out.println("Il n'y a pas d'anneau sur la tour C");
     	    		return;
     	    	}
+    			i=C.pile[C.top];//va chercher l'anneau a deplacer
     			break;
     		default:
     			System.out.println("Valeur Invalid");
     			return;
     	}
-    	
-    	i = ph[deHaut];//va chercher l'anneau a deplacer
     	
     	switch (vers) {
 			case 1:
@@ -108,6 +110,8 @@ public class ToursHanoi {
         		default:
         			return;
         	}
+    	} else {
+    		System.out.println("Ce deplacement n'est pas valide");
     	}
     }
 
@@ -136,12 +140,16 @@ public class ToursHanoi {
     	switch(inpTour){
     		case 1:
     			plein = A.isFull();
+    			break;
     		case 2:
     			plein = B.isFull();
+    			break;
     		case 3:
     			plein = C.isFull();
+    			break;
     		default:
     			plein = false;
+    			break;
     	}
     	return plein;
     }
