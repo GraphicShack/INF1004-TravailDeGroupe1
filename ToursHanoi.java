@@ -29,35 +29,86 @@ public class ToursHanoi {
         }
     }
 
-    public void deplacer(int de,int vers,Anneau i) {
-    //code de validation;
-    	switch (de) {//Switch case pour la valeur "de"
-        	case 1:
-        		A.pop();
-        		break;
-        	case 2:
-        		B.pop();
-                break;
-        	case 3:
-        		C.pop();
-                break;
-        	default:
-        		return;
-    	}
+    public void deplacer(int de,int vers) {
 
-        switch (vers) {//switch case pour la valeur "vers"
-        	case 1:
-        		A.push(i);
-                break;
-        	case 2:
-        		B.push(i);
-                break;
-        	case 3:
-        		C.push(i);
-                break;
-        	default:
-        		return;
-        }
+    	Anneau i;
+    	//code de validation;
+    	int deHaut;//valeur de l'anneau du haut sur la tour initiale
+    	int versHaut;//valeur de l'anneau du haut sur la tour cible
+    	
+    	switch (de) {//switchs necessaire pour cibler l'instance voulu de Tour
+    		case 1:
+    			deHaut = A.peek();
+    			if (deHaut==-1) {//valide si la tour est vide et retourne un message d'erreur au joueur si elle est vide
+    	    		System.out.println("Il n'y a pas d'anneau sur la tour A");
+    	    		return;//met fin a la method pour que le joueur peut continuer a jouer
+    	    	}
+    			break;
+    		case 2:
+    			deHaut = B.peek();
+    			if (deHaut==-1) {
+    	    		System.out.println("Il n'y a pas d'anneau sur la tour B");
+    	    		return;
+    	    	}
+    			break;
+    		case 3:
+    			deHaut = C.peek();
+    			if (deHaut==-1) {
+    	    		System.out.println("Il n'y a pas d'anneau sur la tour C");
+    	    		return;
+    	    	}
+    			break;
+    		default:
+    			System.out.println("Valeur Invalid");
+    			return;
+    	}
+    	
+    	i = ph[deHaut];//va chercher l'anneau a deplacer
+    	
+    	switch (vers) {
+			case 1:
+				versHaut = A.peek();
+				break;
+			case 2:
+				versHaut = B.peek();
+				break;
+			case 3:
+				versHaut = C.peek();
+				break;
+			default:
+				System.out.println("Valeur Invalid");
+				return;
+    	}
+    	if (deHaut < versHaut || versHaut == -1) { //valide que l'anneau qu'on deplace est plus petit que l'anneau du haut de la destination ou que la destination est vide
+    		
+    		switch (de) {//Switch case pour la valeur "de"
+        		case 1:
+        			A.pop();
+        			break;
+        		case 2:
+        			B.pop();
+                	break;
+        		case 3:
+        			C.pop();
+        			break;
+        		default:
+        			return;
+    		}
+
+        	switch (vers) {//switch case pour la valeur "vers"
+        		case 1:
+        			A.push(i);
+                	break;
+        		case 2:
+        			B.push(i);
+                	break;
+        		case 3:
+        			C.push(i);
+                	break;
+        		default:
+        			return;
+        	}
+    	}
     }
 
     public void deplacerAuto(int disque) {
@@ -79,5 +130,21 @@ public class ToursHanoi {
                "Tour B: " + B.toString() + "\n" + 
                "Tour C: " + C.toString();
     }
+    
+    public boolean isFull(int inpTour) { //method pour retourner aller chercher si une tour est pleine
+    	boolean plein;
+    	switch(inpTour){
+    		case 1:
+    			plein = A.isFull();
+    		case 2:
+    			plein = B.isFull();
+    		case 3:
+    			plein = C.isFull();
+    		default:
+    			plein = false;
+    	}
+    	return plein;
+    }
+
 
 }
