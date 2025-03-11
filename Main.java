@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 
@@ -105,7 +106,7 @@ public class Main {
 			vict = tourH.isFull(3);
 			if (vict) {
 				partieActif = false;
-				System.out.println("Tu a gagne! Bravo!");
+				System.out.println("Tu a gagné! Bravo!");
 			}
 			
 		}
@@ -122,6 +123,9 @@ public class Main {
         	int inpNombre;
     		//code pour afficher le menu
         	System.out.println();
+			System.out.println("----------------------------"); 
+			System.out.println("Tours à la position actuelle");
+			System.out.println("----------------------------"); 
     		System.out.println(th.toString());
     		System.out.println();
     		System.out.println("[MENU]");
@@ -131,7 +135,7 @@ public class Main {
     		System.out.println("3: Jouer un coup");
     		System.out.println("4: Montrer la solution");
     		System.out.println("5: Quitter");
-    		System.out.println("Faites votre choix et appuyer sur ENTER");
+    		System.out.print("Faites votre choix et appuyer sur ENTER : ");
     		
     		//code entrer utilisateur
 			inpChar = input();
@@ -160,6 +164,10 @@ public class Main {
     			break;
     		case 4:
     			th.resoudre();
+				System.out.println();  //espacement 
+				System.out.println("*** Résultat final ***");
+				System.out.println(th.toString());
+				th.reinitialiser();
     			break;
     		case 5:
     			var=false;

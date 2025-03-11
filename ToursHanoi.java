@@ -1,6 +1,7 @@
 
 public class ToursHanoi {
     int nombreDanneaux;
+	int nbDeplacements;
     Tour A;
     Tour B;
     Tour C;
@@ -115,18 +116,30 @@ public class ToursHanoi {
     	}
     }
 
-    public void deplacerAuto(int disque) {
-    	if (disque==1) {
-    		//code de deplacement;
+    public void deplacerAuto(int nombreDanneaux, int de, int inter, int vers) {  // inter représente la tour temporaire.... 
+		if (nombreDanneaux==1) {
+			this.nbDeplacements++;
+			deplacer(de, vers);
+			System.out.println();  //espacement 
+            System.out.println("Déplacement #" + this.nbDeplacements); //code de deplacement;
+			System.out.println(this);
     	}
     	else {
-    		//code recursive;
+            deplacerAuto(nombreDanneaux - 1, de, vers, inter);
+            this.nbDeplacements++;
+			deplacer(de, vers);
+			System.out.println();  //espacement 
+            System.out.println("Déplacement #" + this.nbDeplacements );
+			System.out.println(this);
+            deplacerAuto(nombreDanneaux - 1, inter, de, vers);	
     	}
+ 		
     }
 
     public void resoudre() {
-    	reinitialiser();
-        deplacerAuto(nombreDanneaux);
+    	reinitialiser();  // remise a zero
+        deplacerAuto(nombreDanneaux, 1, 2, 3); // resolution automatique
+		
     }
 
     public String toString() {
