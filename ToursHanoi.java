@@ -1,170 +1,171 @@
+package pkg;
 
 public class ToursHanoi {
     int nombreDanneaux;
-	int nbDeplacements;
+    int nbDeplacements;
     Tour A;
     Tour B;
     Tour C;
     Anneau[] ph;//collection temporaire
 
     public ToursHanoi(int x) {
-    	nombreDanneaux = x;
+        nombreDanneaux = x;
         A = new Tour(nombreDanneaux);//définir la tour A de taille nombre d'anneau
         B = new Tour(nombreDanneaux);//définir la tour B de taille nombre d'anneau
         C = new Tour(nombreDanneaux);//définir la tour C de taille nombre d'anneau
         ph = new Anneau[nombreDanneaux];//définir la pile temporaire "ph"
 
         for(int n = nombreDanneaux; n > 0; n--){
-        	ph[nombreDanneaux - n] = new Anneau(n);//ajouter les anneaux sur la pile temporaire
+            ph[nombreDanneaux - n] = new Anneau(n);//ajouter les anneaux sur la pile temporaire
         }
         this.reinitialiser();
     }
 
     public void reinitialiser() {
-    	A.vider();//vider la tour A
+        A.vider();//vider la tour A
         B.vider();//vider la tour B
         C.vider();//vider la tour C
         Anneau ring;
         for (int i = 0;i < nombreDanneaux;i++) {
-        	ring = ph[i];
+            ring = ph[i];
             A.push(ring);
         }
     }
 
     public void deplacer(int de,int vers) {
 
-    	Anneau i;
-    	//code de validation;
-    	int deHaut;//valeur de l'anneau du haut sur la tour initiale
-    	int versHaut;//valeur de l'anneau du haut sur la tour cible
-    	
-    	switch (de) {//switchs necessaire pour cibler l'instance voulu de Tour
-    		case 1:
-    			deHaut = A.peek();
-    			if (deHaut==-1) {//valide si la tour est vide et retourne un message d'erreur au joueur si elle est vide
-    	    		System.out.println("Il n'y a pas d'anneau sur la tour A");
-    	    		return;//met fin a la method pour que le joueur peut continuer a jouer
-    	    	}
-    			i=A.pile[A.top];//va chercher l'anneau a deplacer
-    			break;
-    		case 2:
-    			deHaut = B.peek();
-    			if (deHaut==-1) {
-    	    		System.out.println("Il n'y a pas d'anneau sur la tour B");
-    	    		return;
-    	    	}
-    			i=B.pile[B.top];//va chercher l'anneau a deplacer
-    			break;
-    		case 3:
-    			deHaut = C.peek();
-    			if (deHaut==-1) {
-    	    		System.out.println("Il n'y a pas d'anneau sur la tour C");
-    	    		return;
-    	    	}
-    			i=C.pile[C.top];//va chercher l'anneau a deplacer
-    			break;
-    		default:
-    			System.out.println("Valeur Invalid");
-    			return;
-    	}
-    	
-    	switch (vers) {
-			case 1:
-				versHaut = A.peek();
-				break;
-			case 2:
-				versHaut = B.peek();
-				break;
-			case 3:
-				versHaut = C.peek();
-				break;
-			default:
-				System.out.println("Valeur Invalid");
-				return;
-    	}
-    	if (deHaut < versHaut || versHaut == -1) { //valide que l'anneau qu'on deplace est plus petit que l'anneau du haut de la destination ou que la destination est vide
-    		
-    		switch (de) {//Switch case pour la valeur "de"
-        		case 1:
-        			A.pop();
-        			break;
-        		case 2:
-        			B.pop();
-                	break;
-        		case 3:
-        			C.pop();
-        			break;
-        		default:
-        			return;
-    		}
+        Anneau i;
+        //code de validation;
+        int deHaut;//valeur de l'anneau du haut sur la tour initiale
+        int versHaut;//valeur de l'anneau du haut sur la tour cible
 
-        	switch (vers) {//switch case pour la valeur "vers"
-        		case 1:
-        			A.push(i);
-                	break;
-        		case 2:
-        			B.push(i);
-                	break;
-        		case 3:
-        			C.push(i);
-                	break;
-        		default:
-        			return;
-        	}
-    	} else {
-    		System.out.println("Ce deplacement n'est pas valide");
-    	}
+        switch (de) {//switchs necessaire pour cibler l'instance voulu de Tour
+            case 1:
+                deHaut = A.peek();
+                if (deHaut==-1) {//valide si la tour est vide et retourne un message d'erreur au joueur si elle est vide
+                    System.out.println("Il n'y a pas d'anneau sur la tour A");
+                    return;//met fin a la method pour que le joueur peut continuer a jouer
+                }
+                i=A.pile[A.top];//va chercher l'anneau a deplacer
+                break;
+            case 2:
+                deHaut = B.peek();
+                if (deHaut==-1) {
+                    System.out.println("Il n'y a pas d'anneau sur la tour B");
+                    return;
+                }
+                i=B.pile[B.top];//va chercher l'anneau a deplacer
+                break;
+            case 3:
+                deHaut = C.peek();
+                if (deHaut==-1) {
+                    System.out.println("Il n'y a pas d'anneau sur la tour C");
+                    return;
+                }
+                i=C.pile[C.top];//va chercher l'anneau a deplacer
+                break;
+            default:
+                System.out.println("Valeur Invalide");
+                return;
+        }
+
+        switch (vers) {
+            case 1:
+                versHaut = A.peek();
+                break;
+            case 2:
+                versHaut = B.peek();
+                break;
+            case 3:
+                versHaut = C.peek();
+                break;
+            default:
+                System.out.println("Valeur Invalide");
+                return;
+        }
+        if (deHaut < versHaut || versHaut == -1) { //valide que l'anneau qu'on deplace est plus petit que l'anneau du haut de la destination ou que la destination est vide
+
+            switch (de) {//Switch case pour la valeur "de"
+                case 1:
+                    A.pop();
+                    break;
+                case 2:
+                    B.pop();
+                    break;
+                case 3:
+                    C.pop();
+                    break;
+                default:
+                    return;
+            }
+
+            switch (vers) {//switch case pour la valeur "vers"
+                case 1:
+                    A.push(i);
+                    break;
+                case 2:
+                    B.push(i);
+                    break;
+                case 3:
+                    C.push(i);
+                    break;
+                default:
+                    return;
+            }
+        } else {
+            System.out.println("Ce deplacement n'est pas valide");
+        }
     }
 
-    public void deplacerAuto(int nombreDanneaux, int de, int inter, int vers) {  // inter représente la tour temporaire.... 
-		if (nombreDanneaux==1) {
-			this.nbDeplacements++;
-			deplacer(de, vers);
-			System.out.println();  //espacement 
+    public void deplacerAuto(int nombreDanneaux, int de, int inter, int vers) {  // inter représente la tour temporaire....
+        if (nombreDanneaux==1) {
+            this.nbDeplacements++;
+            deplacer(de, vers);
+            System.out.println();  //espacement
             System.out.println("Déplacement #" + this.nbDeplacements); //code de deplacement;
-			System.out.println(this);
-    	}
-    	else {
+            System.out.println(this);
+        }
+        else {
             deplacerAuto(nombreDanneaux - 1, de, vers, inter);
             this.nbDeplacements++;
-			deplacer(de, vers);
-			System.out.println();  //espacement 
+            deplacer(de, vers);
+            System.out.println();  //espacement
             System.out.println("Déplacement #" + this.nbDeplacements );
-			System.out.println(this);
-            deplacerAuto(nombreDanneaux - 1, inter, de, vers);	
-    	}
- 		
+            System.out.println(this);
+            deplacerAuto(nombreDanneaux - 1, inter, de, vers);
+        }
+
     }
 
     public void resoudre() {
-    	reinitialiser();  // remise a zero
+        reinitialiser();  // remise a zero
         deplacerAuto(nombreDanneaux, 1, 2, 3); // resolution automatique
-		
+
     }
 
     public String toString() {
-    	return "Tour A: " + A.toString() + "\n" + 
-               "Tour B: " + B.toString() + "\n" + 
-               "Tour C: " + C.toString();
+        return "Tour A: " + A.toString() + "\n" +
+                "Tour B: " + B.toString() + "\n" +
+                "Tour C: " + C.toString();
     }
-    
+
     public boolean isFull(int inpTour) { //method pour retourner aller chercher si une tour est pleine
-    	boolean plein;
-    	switch(inpTour){
-    		case 1:
-    			plein = A.isFull();
-    			break;
-    		case 2:
-    			plein = B.isFull();
-    			break;
-    		case 3:
-    			plein = C.isFull();
-    			break;
-    		default:
-    			plein = false;
-    			break;
-    	}
-    	return plein;
+        boolean plein;
+        switch(inpTour){
+            case 1:
+                plein = A.isFull();
+                break;
+            case 2:
+                plein = B.isFull();
+                break;
+            case 3:
+                plein = C.isFull();
+                break;
+            default:
+                plein = false;
+                break;
+        }
+        return plein;
     }
 
 
